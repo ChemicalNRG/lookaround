@@ -52,7 +52,7 @@ auth = Authenticator()
 zoom = 2
 for face in range(0, 6):
     image = get_panorama_face(panos[0].id, panos[0].region_id, face, zoom, auth)
-    with open(f"{panos[0].panoid}_{face}_{zoom}.heic", "wb") as f:
+    with open(f"{panos[0].id}_{face}_{zoom}.heic", "wb") as f:
         f.write(image)
 ```
 
