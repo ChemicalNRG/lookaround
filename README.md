@@ -11,7 +11,7 @@ from lookaround import get_coverage_tile_by_latlon
 # fetches all panoramas on the tile which contains this coordinate
 panos = get_coverage_tile_by_latlon(46.52943, 10.45544)
 print(len(panos))
-print(panos[0].panoid)
+print(panos[0].id)
 print(panos[0].region_id)  # I have no idea what this actually is, but it's
                            # a secondary key required for downloading images
                            # which appears to stay the same for a large region,
@@ -29,7 +29,7 @@ The code for this is a translation of [retroplasma/flyover-reverse-engineering](
 none of this would've been possible).
 
 ```python
-from lookaround.auth import Authenticator
+from auth import Authenticator
 
 auth = Authenticator()
 # example:
@@ -43,15 +43,15 @@ Panoramas are made up of six faces; four side faces (0-3) and a top (4) and bott
 Each face can be downloaded in eight different resolutions, where 0 is the largest and 7 is the smallest.
 
 ```python
-from lookaround import get_coverage_tile_by_latlon, get_pano_face
-from lookaround.auth import Authenticator
+from lookaround import get_coverage_tile_by_latlon, get_panorama_face
+from auth import Authenticator
 
 panos = get_coverage_tile_by_latlon(46.52943, 10.45544)
 
 auth = Authenticator()
 zoom = 2
 for face in range(0, 6):
-    image = get_pano_face(panos[0].panoid, panos[0].region_id, face, zoom, auth)
+    image = get_panorama_face(panos[0].id, panos[0].region_id, face, zoom, auth)
     with open(f"{panos[0].panoid}_{face}_{zoom}.heic", "wb") as f:
         f.write(image)
 ```
