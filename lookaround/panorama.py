@@ -4,7 +4,7 @@ from typing import Any
 
 @dataclass
 class LookaroundPanorama:
-    panoid: int
+    id: int
     region_id: int
     lat: float 
     lon: float 
